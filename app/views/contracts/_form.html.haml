@@ -11,22 +11,22 @@
     = f.date_select :date, class: 'form-control'
   .form-group
     = f.label :number
-    = f.text_area :number, class: 'form-control'
+    = f.text_field :number, class: 'form-control'
   .form-group
     = f.label :employer_name
-    = f.text_area :employer_name, class: 'form-control'
+    = f.text_field :employer_name, class: 'form-control'
   .form-group
     = f.label :employee_name
-    = f.text_area :employee_name, class: 'form-control'
+    = f.text_field :employee_name, class: 'form-control'
   .form-group
     = f.label :gross_amount
-    = f.text_area :gross_amount, class: 'form-control'
+    = f.text_field :gross_amount, class: 'form-control'
   .form-group
     = f.label :tax_rate
-    = f.text_area :tax_rate, class: 'form-control'
+    = f.select(:tax_rate, Contract::TAX_RATES, {include_blank: true})
   .form-group
     = f.label :bill_number
-    = f.text_area :bill_number, class: 'form-control'
+    = f.text_field :bill_number, class: 'form-control'
 
   = f.submit 'Save', class: 'btn btn-default'
   = link_to 'Back', root_path, class:  'btn btn-default'
