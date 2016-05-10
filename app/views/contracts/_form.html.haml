@@ -1,0 +1,32 @@
+= form_for @contract do |f|
+  - if @contract.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@contract.errors.count, "error")} prohibited this contract from being saved:"
+      %ul
+        - @contract.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :date
+    = f.date_select :date, class: 'form-control'
+  .form-group
+    = f.label :number
+    = f.text_area :number, class: 'form-control'
+  .form-group
+    = f.label :employer_name
+    = f.text_area :employer_name, class: 'form-control'
+  .form-group
+    = f.label :employee_name
+    = f.text_area :employee_name, class: 'form-control'
+  .form-group
+    = f.label :gross_amount
+    = f.text_area :gross_amount, class: 'form-control'
+  .form-group
+    = f.label :tax_rate
+    = f.text_area :tax_rate, class: 'form-control'
+  .form-group
+    = f.label :bill_number
+    = f.text_area :bill_number, class: 'form-control'
+
+  = f.submit 'Save', class: 'btn btn-default'
+  = link_to 'Back', root_path, class:  'btn btn-default'
