@@ -34,6 +34,13 @@ class ContractsController < ApplicationController
     end
   end
 
+  def destroy
+    @contract = Contract.find(params[:id])
+    if @contract.destroy
+      redirect_to contracts_path
+    end
+  end
+
   def generate_bill
     @contract = Contract.find(params[:id])
     respond_to do |format|
