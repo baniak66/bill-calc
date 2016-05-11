@@ -7,5 +7,5 @@
   %h4 Gross amount: #{@contract.gross_amount}
   %h4 Cost rate: #{@contract.cost_rate * 100} %
 
-  =link_to "Generate bill", "#", class: "btn btn-danger"
+  =link_to "Generate bill", generate_bill_path(id: @contract.id, format: :pdf), class: "btn btn-danger"
 

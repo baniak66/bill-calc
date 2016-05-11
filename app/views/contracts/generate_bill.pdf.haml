@@ -1,0 +1,15 @@
+=wicked_pdf_stylesheet_link_tag 'application'
+%h2 Bill no: #{@contract.bill_number}
+
+%h4 for contract no: #{@contract.number} signed #{@contract.date} between:
+%h4 #{@contract.employer_name} (employer)
+%h4 and
+%h4 #{@contract.employee_name} (employee)
+
+%h3 Gross amount: #{@contract.gross_amount}
+%h3 Income costs: #{@contract.income_costs}
+%h3 Tax base: #{@contract.tax_base}
+%h3 Tax to pay: #{@contract.tax_to_pay}
+%h3 Net amount: #{@contract.net_amount}
+
+
