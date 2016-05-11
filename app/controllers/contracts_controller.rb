@@ -1,6 +1,7 @@
 class ContractsController < ApplicationController
 
   def index
+    @contracts = Contract.all
   end
 
   def new
@@ -18,7 +19,7 @@ class ContractsController < ApplicationController
 
   private
     def contract_params
-      params.require(:contract).permit(:date, :number, :employer_name, :employee_name, :gross_amount, :tax_rate, :bill_number)
+      params.require(:contract).permit(:date, :number, :employer_name, :employee_name, :gross_amount, :cost_rate, :bill_number)
     end
 
 end

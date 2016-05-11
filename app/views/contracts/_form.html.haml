@@ -22,8 +22,8 @@
     = f.label :gross_amount
     = f.text_field :gross_amount, class: 'form-control'
   .form-group
-    = f.label :tax_rate
-    = f.select(:tax_rate, Contract::TAX_RATES, {include_blank: true})
+    = f.label :cost_rate
+    = f.select(:cost_rate, Contract::COST_RATES, {include_blank: true})
   .form-group
     = f.label :bill_number
     = f.text_field :bill_number, class: 'form-control'
