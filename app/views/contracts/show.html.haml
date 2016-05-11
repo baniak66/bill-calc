@@ -1,0 +1,11 @@
+.container
+  %h3 Contract no #{@contract.number}
+
+  %h4 Sign date: #{@contract.date}
+  %h4 Employer: #{@contract.employer_name}
+  %h4 Employee: #{@contract.employee_name}
+  %h4 Gross amount: #{@contract.gross_amount}
+  %h4 Cost rate: #{@contract.cost_rate * 100} %
+
+  =link_to "Generate bill", "#", class: "btn btn-danger"
+

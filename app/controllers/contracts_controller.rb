@@ -4,6 +4,10 @@ class ContractsController < ApplicationController
     @contracts = Contract.all
   end
 
+  def show
+    @contract = Contract.find(params[:id])
+  end
+
   def new
     @contract = Contract.new
   end
