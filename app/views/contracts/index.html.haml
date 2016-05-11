@@ -1,0 +1,23 @@
+.container
+  %h3 Contracts
+  %table.table
+    %tr
+      %th Number
+      %th Date
+      %th Employer
+      %th Employee
+      %th Gross amount
+      %th Cost rate
+      %th
+    -@contracts.each do |c|
+      %tr
+        %td= c.number
+        %td= c.date
+        %td= c.employer_name
+        %td= c.employee_name
+        %td= c.gross_amount
+        %td= c.cost_rate
+        %td= link_to 'Show', contract_path(c.id), class: "btn btn-default btn-sm"
+
+.container
+  =link_to "New contract", new_contract_path, class: "btn btn-default"
