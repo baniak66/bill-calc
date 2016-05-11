@@ -1,19 +1,12 @@
 class ContractsController < ApplicationController
+  before_action :set_contract, except: [:index, :new, :create]
 
   def index
     @contracts = Contract.all
   end
 
-  def show
-    @contract = Contract.find(params[:id])
-  end
-
   def new
     @contract = Contract.new
-  end
-
-  def edit
-    @contract = Contract.find(params[:id])
   end
 
   def create
@@ -26,7 +19,6 @@ class ContractsController < ApplicationController
   end
 
   def update
-    @contract = Contract.find(params[:id])
     if @contract.update(contract_params)
       redirect_to @contract
     else
@@ -35,14 +27,12 @@ class ContractsController < ApplicationController
   end
 
   def destroy
-    @contract = Contract.find(params[:id])
     if @contract.destroy
       redirect_to contracts_path
     end
   end
 
   def generate_bill
-    @contract = Contract.find(params[:id])
     respond_to do |format|
       format.pdf do
         render pdf: "Bill #{@contract.bill_number}"
@@ -55,4 +45,7 @@ class ContractsController < ApplicationController
       params.require(:contract).permit(:date, :number, :employer_name, :employee_name, :gross_amount, :cost_rate, :bill_number)
     end
 
+    def set_contract
+      @contract = Contract.find(params[:id])
+    end
 end
