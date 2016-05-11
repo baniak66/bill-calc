@@ -3,4 +3,16 @@ class Contract < ActiveRecord::Base
   validates :date, :number, :employer_name, :employee_name, :gross_amount,
             :cost_rate, :bill_number, presence: true
 
+  def income_costs
+    gross_amount * cost_rate
+  end
+
+  def tax_base
+    gross_amount - income_costs
+  end
+
+  def tax_to_pay
+    tax_base * 0.18
+  end
+
 end
