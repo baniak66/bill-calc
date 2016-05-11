@@ -12,12 +12,25 @@ class ContractsController < ApplicationController
     @contract = Contract.new
   end
 
+  def edit
+    @contract = Contract.find(params[:id])
+  end
+
   def create
     @contract = Contract.create(contract_params)
     if @contract.save
       redirect_to contracts_path
     else
       render "new"
+    end
+  end
+
+  def update
+    @contract = Contract.find(params[:id])
+    if @contract.update(contract_params)
+      redirect_to @contract
+    else
+      render action: 'edit'
     end
   end
 
