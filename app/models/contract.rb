@@ -15,4 +15,7 @@ class Contract < ActiveRecord::Base
     tax_base * 0.18
   end
 
+  def net_amount
+    tax_base - tax_to_pay
+  end
 end
