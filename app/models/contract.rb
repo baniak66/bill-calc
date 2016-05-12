@@ -14,10 +14,10 @@ class Contract < ActiveRecord::Base
   end
 
   def tax_to_pay
-    if sum_tax_base < @@income_limit
+    if (sum_tax_base + tax_base) < @@income_limit
       tax_base * 0.18
     else
-      ((@@income_limit  - sum_tax_base) * 0.32) + ((tax_base + sum_tax_base - @@income_limit) * 0.18)
+      ((@@income_limit  - sum_tax_base) * 0.18) + ((tax_base + sum_tax_base - @@income_limit) * 0.32)
     end
   end
 
@@ -29,4 +29,5 @@ class Contract < ActiveRecord::Base
     Contract.where(employee_name: employee_name, date: date.beginning_of_year..date.end_of_year).
     select{ |d| d.created_at < created_at }.map{ |e| e.tax_base }.sum
   end
+
 end
