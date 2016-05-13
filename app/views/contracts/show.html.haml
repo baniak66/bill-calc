@@ -3,12 +3,24 @@
 
   %h4 Sign date: #{@contract.date}
   %h4 Employer: #{@contract.employer_name}
+  %h4 Tax number: #{@contract.employer_tax_number}
   %h4 Employee: #{@contract.employee_name}
+  %h4 Tax number: #{@contract.employee_tax_number}
   %h4 Gross amount: #{@contract.gross_amount}
   %h4 Cost rate: #{@contract.cost_rate * 100} %
 
   =link_to "Back", contracts_path, class: "btn btn-default"
   =link_to "Edit", edit_contract_path(@contract), class: "btn btn-warning"
   =link_to "Delete", contract_path(@contract), method: :delete, class: "btn btn-danger"
-  =link_to "Generate bill", generate_bill_path(id: @contract.id, format: :pdf), class: "btn btn-info"
+
+.container
+  %h3 Bill no: #{@contract.bill_number}
+
+  %h4 Gross amount: #{@contract.gross_amount}
+  %h4 Income costs: #{@contract.income_costs}
+  %h4 Tax base: #{@contract.tax_base}
+  %h4 Tax to pay: #{@contract.tax_to_pay}
+  %h4 Net amount: #{@contract.net_amount}
+
+  =link_to "Print bill to PDF", generate_bill_path(id: @contract.id, format: :pdf), class: "btn btn-info"
 
