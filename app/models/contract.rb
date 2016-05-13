@@ -4,9 +4,16 @@ class Contract < ActiveRecord::Base
             :cost_rate, :bill_number, presence: true
 
   @@income_limit = 85528
+  @@cost_limit = 42764
 
   def income_costs
-    gross_amount * cost_rate
+    if sum_cost_50_percent > @@cost_limit
+      gross_amount * 0.2
+    elsif (gross_amount * cost_rate) + sum_cost_50_percent > @@cost_limit
+      (@@cost_limit - sum_cost_50_percent) + ((gross_amount - ((@@cost_limit - sum_cost_50_percent) / 0.5)) * 0.2)
+    else
+      gross_amount * cost_rate
+    end
   end
 
   def tax_base
@@ -30,4 +37,8 @@ class Contract < ActiveRecord::Base
     select{ |d| d.created_at < created_at }.map{ |e| e.tax_base }.sum
   end
 
+  def sum_cost_50_percent
+    Contract.where(employee_name: employee_name, cost_rate: 0.5, date: date.beginning_of_year..date.end_of_year).
+    select{ |d| d.created_at < created_at }.map{ |e| e.income_costs }.sum
+  end
 end
