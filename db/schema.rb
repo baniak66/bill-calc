@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511172909) do
+ActiveRecord::Schema.define(version: 20160513202756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,11 +21,13 @@ ActiveRecord::Schema.define(version: 20160511172909) do
     t.string   "number"
     t.string   "employer_name"
     t.string   "employee_name"
-    t.decimal  "gross_amount",  precision: 10, scale: 2
-    t.decimal  "cost_rate",     precision: 5,  scale: 2
+    t.decimal  "gross_amount",        precision: 10, scale: 2
+    t.decimal  "cost_rate",           precision: 5,  scale: 2
     t.string   "bill_number"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.string   "employer_tax_number"
+    t.string   "employee_tax_number"
   end
 
 end
