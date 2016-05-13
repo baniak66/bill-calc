@@ -23,9 +23,9 @@ class Contract < ActiveRecord::Base
 
   def tax_to_pay
     if (sum_tax_base + tax_base) < @@income_limit
-      tax_base * 0.18
+      (tax_base * 0.18).round(2)
     else
-      ((@@income_limit  - sum_tax_base) * 0.18) + ((tax_base + sum_tax_base - @@income_limit) * 0.32)
+      (((@@income_limit  - sum_tax_base) * 0.18) + ((tax_base + sum_tax_base - @@income_limit) * 0.32)).round(2)
     end
   end
 
@@ -35,11 +35,11 @@ class Contract < ActiveRecord::Base
 
   def sum_tax_base
     Contract.where(employee_tax_number: employee_tax_number, date: date.beginning_of_year..date.end_of_year).
-    select{ |d| d.created_at < created_at }.map{ |e| e.tax_base }.sum
+    select{ |d| d.created_at < created_at }.map{ |e| e.tax_base }.sum.round(2)
   end
 
   def sum_cost_50_percent
     Contract.where(employee_tax_number: employee_tax_number, cost_rate: 0.5, date: date.beginning_of_year..date.end_of_year).
-    select{ |d| d.created_at < created_at }.map{ |e| e.income_costs }.sum
+    select{ |d| d.created_at < created_at }.map{ |e| e.income_costs }.sum.round(2)
   end
 end
