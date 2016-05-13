@@ -42,7 +42,8 @@ class ContractsController < ApplicationController
 
   private
     def contract_params
-      params.require(:contract).permit(:date, :number, :employer_name, :employee_name, :gross_amount, :cost_rate, :bill_number)
+      params.require(:contract).permit(:date, :number, :employer_name, :employer_tax_number,
+        :employee_name, :employee_tax_number, :gross_amount, :cost_rate, :bill_number)
     end
 
     def set_contract

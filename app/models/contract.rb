@@ -1,7 +1,8 @@
 class Contract < ActiveRecord::Base
   COST_RATES = { "0%" => 0.0, "20%" => 0.2, "50%" => 0.5 }
   validates :date, :number, :employer_name, :employee_name, :gross_amount,
-            :cost_rate, :bill_number, presence: true
+            :cost_rate, :bill_number, :employer_tax_number, :employee_tax_number, presence: true
+  validates_format_of :employer_tax_number, :employee_tax_number, :with => /\A\d{10}\z/
 
   @@income_limit = 85528
   @@cost_limit = 42764
@@ -33,12 +34,12 @@ class Contract < ActiveRecord::Base
   end
 
   def sum_tax_base
-    Contract.where(employee_name: employee_name, date: date.beginning_of_year..date.end_of_year).
+    Contract.where(employee_tax_number: employee_tax_number, date: date.beginning_of_year..date.end_of_year).
     select{ |d| d.created_at < created_at }.map{ |e| e.tax_base }.sum
   end
 
   def sum_cost_50_percent
-    Contract.where(employee_name: employee_name, cost_rate: 0.5, date: date.beginning_of_year..date.end_of_year).
+    Contract.where(employee_tax_number: employee_tax_number, cost_rate: 0.5, date: date.beginning_of_year..date.end_of_year).
     select{ |d| d.created_at < created_at }.map{ |e| e.income_costs }.sum
   end
 end
